@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.IO;
 
 
 namespace MovieLibrary
@@ -8,7 +9,12 @@ namespace MovieLibrary
     {
         static void Main(string[] args)
         {
-            var logger = NLog.LogManager.GetCurrentClassLogger();
+
+            string path = Directory.GetCurrentDirectory() + "\\nlog.config";
+
+            // create instance of Logger
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog(path).GetCurrentClassLogger();
+            
             logger.Trace("Starting Application");
 
  
