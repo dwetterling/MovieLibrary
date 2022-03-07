@@ -20,7 +20,7 @@ namespace MovieLibrary
  
            
             int selection = 0;
-            string filePath = "movies.csv";
+            string filePath = "movies.scrubbed.csv";
 
             MovieFile movieList = new MovieFile(filePath);
 
@@ -47,6 +47,8 @@ namespace MovieLibrary
                     string newTitle = Console.ReadLine();
                     string genre = "";
                     string temp = "";
+                    string director = "";
+                    string runningtime = "";
                     do
                     {
                         Console.WriteLine("Enter genres - 'done' when complete");
@@ -57,6 +59,12 @@ namespace MovieLibrary
                         }
                     } while (temp.ToLower() != "done");
                     genre = genre.Substring(0, genre.Length - 1);
+                    //ask user for director
+                        Console.WriteLine("Enter the director");
+                        director = Console.ReadLine();
+                        //ask user for movie run time
+                        Console.WriteLine("Enter the movies runtime (h:m:s)");
+                        runningtime = Console.ReadLine();
 
                     // Check for duplicates
                     
@@ -66,6 +74,8 @@ namespace MovieLibrary
                         newMovie.movieID = newID;
                         newMovie.Title = newTitle;
                         newMovie.Genres = genre.Split('|').ToList();
+                        newMovie.director = director;
+                        newMovie.runningtime = runningtime;
                         movieList.WriteFile(newMovie);
                     }
                     else if (movieList.Search(newTitle).Count == 1){
